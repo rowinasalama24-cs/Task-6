@@ -1,0 +1,35 @@
+let students = [];
+
+function calculateAverage(grades) {
+    if (!grades || grades.length === 0) return 0;
+    const sum = grades.reduce((acc, curr) => acc + curr, 0);
+    return Number((sum / grades.length).toFixed(2));
+}
+
+function addStudent(name, grades) {
+    const student = {
+        id: Date.now().toString(),
+        name,
+        grades,
+        average: calculateAverage(grades)
+    };
+    students.push(student);
+}
+
+function listStudents() {
+    console.table(students);
+}
+
+function filterPassed() {
+    const passedStudents = students.filter(student => student.average >= 60);
+    console.table(passedStudents);
+    return passedStudents;
+}
+
+addStudent("Ahmed", [85, 90, 78]);
+addStudent("Mona", [92, 95, 88]);
+addStudent("Ali", [45, 50, 55]);
+
+listStudents();
+
+filterPassed();
